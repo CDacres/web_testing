@@ -93,6 +93,13 @@ describe 'qa form' do
     expect(@driver.find_element(:id, 'profession-1').selected?).to eq true
   end
 
+  it 'should upload a test file' do
+    @driver.find_element(id: 'photo').send_keys('/Users/tech-a68/SDET11/web_testing/selenium/qa_form/test.txt')
+    # # find_element below doesn't work, can't find file name text
+    # upload = @driver.find_element(:value, 'test.txt').text
+    # expect(upload).to eq('test.txt')
+  end
+
   it 'should click on the automation tool radio button' do
     expect(@driver.find_element(:id, 'tool-0').displayed?).to eq true
     @driver.find_element(:id, 'tool-0').click
@@ -176,6 +183,16 @@ describe 'qa form' do
     expect(@driver.find_element(:name, 'firstname')['value']).to eq('')
     expect(@driver.find_element(:name, 'lastname')['value']).to eq('')
     expect(@driver.find_element(:id, 'datepicker')['value']).to eq('')
+  end
+
+  it 'should print out all strong tags' do
+    @driver.find_elements(:css, 'strong').each do |i|
+      puts i.text
+    end
+  end
+
+  it 'should check for partial link text with xpath' do
+    expect(@driver.find_element(:xpath, '//*[@id="content"]/form/fieldset/div[1]/a[1]/strong').displayed?).to eq true
   end
 
 end
